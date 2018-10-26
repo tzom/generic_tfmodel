@@ -71,7 +71,7 @@ def train(data):
         # Loop over all batches
         for i in range(total_batch):
             # Fit training using batch data
-            batch = data.train.next_batch(100)
+            batch = data.train.next_batch(batch_size)
             loss = model.partial_fit(batch)
             # Compute average loss
         avg_loss += loss / n_samples * batch_size
