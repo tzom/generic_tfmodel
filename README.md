@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # generic_tfmodel
 
 This repository contains all the ***common*** bits-and-pieces, which are needed to train and use a model (graph in tensorflow).
@@ -14,6 +13,4 @@ model.py contains a generic model class.
 
 It can be used as a template or a class to inherit from.
 Running this script examplifies the training workflow for the MNIST dataset using a tiny network.
-=======
-# generic_tfmodel
->>>>>>> 3fda9abf980c379099d84ba547370a4d50dedc5c
+
