@@ -8,15 +8,15 @@ class Model:
     def __init__(self, batch):
         self.learning_rate = 0.01
         self.X ,self.label = batch
-        self.prediction
-        self.create_loss_optimizer
+        self._prediction
+        self._create_loss_optimizer
         #self.optimize
         #self.error
         self.sess = tf.InteractiveSession()
         self.sess.run(tf.initialize_all_variables())
 
     @define_scope(initializer=tf.contrib.slim.xavier_initializer())
-    def prediction(self):
+    def _prediction(self):
         x = self.X
         x = tf.contrib.slim.fully_connected(x, 200)
         x = tf.contrib.slim.fully_connected(x, 200)
@@ -24,8 +24,8 @@ class Model:
         return x
 
     @define_scope
-    def create_loss_optimizer(self):
-        logprob = tf.log(self.prediction + 1e-12)
+    def _create_loss_optimizer(self):
+        logprob = tf.log(self._prediction + 1e-12)
         cross_entropy = -tf.reduce_sum(self.label * logprob)
         self.loss = cross_entropy
         self.optimizer = \
@@ -45,7 +45,7 @@ class Model:
         Return loss of mini-batch.
         """
         X, label = batch
-        y = self.sess.run(tf.argmax(self.prediction,1), 
+        y = self.sess.run(tf.argmax(self._prediction,1), 
                                   feed_dict={self.X: X, self.label: label})
         return y
 
