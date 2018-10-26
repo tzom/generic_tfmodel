@@ -10,8 +10,7 @@ class Model:
         self.X ,self.label = batch
         self._prediction
         self._create_loss_optimizer
-        #self.optimize
-        #self.error
+
         self.sess = tf.InteractiveSession()
         self.sess.run(tf.initialize_all_variables())
 
@@ -25,14 +24,17 @@ class Model:
 
     @define_scope
     def _create_loss_optimizer(self):
+        ### DEFINE LOSS 
         logprob = tf.log(self._prediction + 1e-12)
         cross_entropy = -tf.reduce_sum(self.label * logprob)
         self.loss = cross_entropy
+
+        ### DEFINE OPTIMIZER
         self.optimizer = \
             tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.loss)
 
     def partial_fit(self, batch):
-        """Train model based on mini-batch of input data.        
+        """For training the model based on mini-batch of input data.        
         Return loss of mini-batch.
         """
         X, label = batch
@@ -41,8 +43,8 @@ class Model:
         return loss
 
     def predict(self, batch):
-        """Train model based on mini-batch of input data.        
-        Return loss of mini-batch.
+        """Run graph and predict y given input X
+        Return prediction y 
         """
         X, label = batch
         y = self.sess.run(tf.argmax(self._prediction,1), 
