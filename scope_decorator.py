@@ -31,7 +31,7 @@ def define_scope(function, scope=None, *args, **kwargs):
     """
     attribute = '_cache_' + function.__name__
     name = scope or function.__name__
-    name = name.replace('_','') # to remove underscore, in case function was private (single_leading_underscore)
+    name = name.strip('_') # to remove underscore, in case function was private (single_leading_underscore)
     @property
     @functools.wraps(function)
     def decorator(self):
